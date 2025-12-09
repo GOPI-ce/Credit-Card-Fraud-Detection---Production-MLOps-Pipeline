@@ -1,0 +1,134 @@
+# Main Configuration File
+
+project:
+  name: fraud-detection-mlops
+  version: "0.1.0"
+  author: "Your Name"
+
+paths:
+  data:
+    raw: "data/raw"
+    processed: "data/processed"
+    features: "data/features"
+    models: "models"
+    logs: "logs"
+    metrics: "metrics"
+  
+data_ingestion:
+  source_type: "csv"  # csv, database, api, s3
+  source_path: "data/raw/creditcard.csv"
+  batch_size: 10000
+  validation_split: 0.2
+  test_split: 0.1
+  random_state: 42
+  
+database:
+  host: "localhost"
+  port: 5432
+  name: "fraud_detection"
+  user: "postgres"
+  password: "${DB_PASSWORD}"
+  
+data_cleaning:
+  missing_threshold: 0.3  # Drop columns with >30% missing
+  outlier_method: "iqr"   # iqr, zscore, isolation_forest
+  outlier_threshold: 3.0
+  duplicate_handling: "drop"  # drop, keep_first, keep_last
+  
+feature_engineering:
+  scaling_method: "standard"  # standard, minmax, robust
+  encoding_method: "target"   # onehot, label, target
+  feature_selection: true
+  n_features: 20
+  pca_components: null  # null or int
+  
+model:
+  name: "xgboost"
+  task: "classification"
+  objective: "binary:logistic"
+  metric: "auc"
+  
+training:
+  experiment_name: "fraud-detection"
+  n_trials: 50  # Optuna trials
+  cv_folds: 5
+  early_stopping_rounds: 50
+  random_state: 42
+  use_gpu: false
+  
+hyperparameters:
+  xgboost:
+    n_estimators: [100, 500, 1000]
+    max_depth: [3, 5, 7, 10]
+    learning_rate: [0.01, 0.05, 0.1, 0.3]
+    subsample: [0.6, 0.8, 1.0]
+    colsample_bytree: [0.6, 0.8, 1.0]
+    gamma: [0, 0.1, 0.5, 1.0]
+    min_child_weight: [1, 3, 5]
+    scale_pos_weight: [1, 10, 50, 100]
+  
+  lightgbm:
+    n_estimators: [100, 500, 1000]
+    max_depth: [3, 5, 7, 10]
+    learning_rate: [0.01, 0.05, 0.1]
+    num_leaves: [15, 31, 63, 127]
+    subsample: [0.6, 0.8, 1.0]
+    colsample_bytree: [0.6, 0.8, 1.0]
+    
+validation:
+  metrics:
+    - "accuracy"
+    - "precision"
+    - "recall"
+    - "f1"
+    - "roc_auc"
+    - "pr_auc"
+  threshold: 0.5
+  min_precision: 0.85
+  min_recall: 0.80
+  
+deployment:
+  model_registry: "mlflow"  # mlflow, s3
+  serving_framework: "fastapi"
+  docker_image: "fraud-detection:latest"
+  replicas: 3
+  cpu_limit: "2"
+  memory_limit: "4Gi"
+  
+monitoring:
+  enable_prometheus: true
+  enable_evidently: true
+  data_drift_threshold: 0.1
+  model_drift_threshold: 0.05
+  alert_email: "alerts@example.com"
+  metrics_interval: 60  # seconds
+  
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  format: "json"
+  file: "logs/app.log"
+  rotation: "100 MB"
+  retention: "30 days"
+  
+mlflow:
+  tracking_uri: "http://localhost:5000"
+  artifact_location: "s3://mlflow-artifacts"
+  experiment_name: "fraud-detection"
+  
+dvc:
+  remote: "s3"
+  bucket: "fraud-detection-dvc"
+  region: "us-east-1"
+  
+airflow:
+  dag_id: "fraud_detection_pipeline"
+  schedule_interval: "@daily"
+  max_active_runs: 1
+  catchup: false
+  
+api:
+  host: "0.0.0.0"
+  port: 8000
+  workers: 4
+  reload: false
+  log_level: "info"
