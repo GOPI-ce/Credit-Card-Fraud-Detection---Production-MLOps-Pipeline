@@ -2,12 +2,6 @@
 
 A complete production-ready machine learning system for real-time credit card fraud detection with MLOps best practices, featuring FastAPI backend and interactive Streamlit dashboard.
 
-## 🌟 Live Demo
-
-![Fraud Detection Dashboard](https://img.shields.io/badge/Status-Production%20Ready-brightgreen)
-![Python](https://img.shields.io/badge/Python-3.12-blue)
-![XGBoost](https://img.shields.io/badge/Model-XGBoost-orange)
-![ROC-AUC](https://img.shields.io/badge/ROC--AUC-97.14%25-success)
 
 ## 🏗️ System Architecture
 
@@ -403,5 +397,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 **Built with ❤️ for production-grade ML systems**
+
 
 
