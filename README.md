@@ -388,15 +388,7 @@ data:
 - [ ] **Mobile App**: Flutter/React Native frontend
 - [ ] **Notification System**: Email/SMS alerts for fraud detection
 
-### Contributing
 
-We welcome contributions! Please:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit changes (`git commit -m 'Add AmazingFeature'`)
-4. Push to branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
 
 ## 📄 License
 
@@ -405,22 +397,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🙏 Acknowledgments
 
 - **Dataset**: [ULB Machine Learning Group](https://www.kaggle.com/mlg-ulb/creditcardfraud)
-- **XGBoost**: Tianqi Chen and Carlos Guestrin
-- **FastAPI**: Sebastián Ramírez
-- **Streamlit**: Streamlit Team
 
-## 📞 Contact
 
-**Project Maintainer**: Your Name
-- GitHub: [@yourusername](https://github.com/yourusername)
-- Email: your.email@example.com
-- LinkedIn: [Your Profile](https://linkedin.com/in/yourprofile)
-
-## ⭐ Star History
-
-If you find this project useful, please consider giving it a star! ⭐
 
 ---
 
 **Built with ❤️ for production-grade ML systems**
+
 
